@@ -16,7 +16,7 @@ const LogoFallback = () => {
       name="networks/logo-placeholder"
       width="120px"
       height="24px"
-      color={{ base: 'blue.600', _dark: 'white' }}
+      color={{ base: 'north.500', _dark: 'white' }}
       aria-label="Network logo placeholder"
     />
   );
@@ -28,7 +28,10 @@ type Props = {
 
 const NetworkLogo = ({ className }: Props) => {
 
-  const logoSrc = useColorModeValue(config.UI.navigation.logo.default, config.UI.navigation.logo.dark || config.UI.navigation.logo.default);
+  const logoSrc = useColorModeValue(
+    config.UI.navigation.logo.default || '/static/NILogo.png',
+    config.UI.navigation.logo.dark || config.UI.navigation.logo.default || '/static/NorthWh.png',
+  );
 
   return (
     <chakra.a

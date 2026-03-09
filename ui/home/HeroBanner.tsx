@@ -4,21 +4,16 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
 
 import config from 'configs/app';
-import useIsMobile from 'lib/hooks/useIsMobile';
 import RewardsButton from 'ui/rewards/RewardsButton';
-import AdBanner from 'ui/shared/ad/AdBanner';
 import SearchBar from 'ui/snippets/searchBar/SearchBarDesktop';
 import SearchBarMobile from 'ui/snippets/searchBar/SearchBarMobile';
 import UserProfileDesktop from 'ui/snippets/user/UserProfileDesktop';
 
-export const BACKGROUND_DEFAULT =
-  'radial-gradient(103.03% 103.03% at 0% 0%, rgba(183, 148, 244, 0.8) 0%, rgba(0, 163, 196, 0.8) 100%), var(--chakra-colors-blue-400)';
+export const BACKGROUND_DEFAULT = '#2CA6A4';
 const TEXT_COLOR_DEFAULT = 'white';
 const BORDER_DEFAULT = 'none';
 
 const HeroBanner = () => {
-
-  const isMobile = useIsMobile();
 
   const background = {
     _light:
@@ -70,8 +65,8 @@ const HeroBanner = () => {
           >
             {
               config.meta.seo.enhancedDataEnabled ?
-                `${ config.chain.name } blockchain explorer` :
-                `${ config.chain.name } explorer`
+                `${ config.chain.name } Blockchain Explorer` :
+                `${ config.chain.name } Explorer`
             }
           </Heading>
           { config.UI.navigation.layout === 'vertical' && (
@@ -88,7 +83,6 @@ const HeroBanner = () => {
           <SearchBar isHeroBanner/>
         </Box>
       </Box>
-      { !isMobile && <AdBanner format="mobile" w="fit-content" flexShrink={ 0 } borderRadius="md" overflow="hidden"/> }
     </Flex>
   );
 };

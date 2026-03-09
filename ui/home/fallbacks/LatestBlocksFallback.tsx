@@ -13,7 +13,7 @@ const LatestBlocksFallback = () => {
           <Box key={ index } width="100%" p={ 3 } borderRadius="md" border="1px solid" borderColor="border.divider">
             <Flex alignItems="center" w="100%">
               <IconSvg name="block" boxSize={ 5 } color={{ _light: 'gray.300', _dark: 'whiteAlpha.300' }}/>
-              <FallbackBox w="100px" bgColor={{ _light: 'blue.50', _dark: 'blue.800' }} ml={ 2 }/>
+              <FallbackBox w="100px" bgColor={{ _light: 'north.50', _dark: 'navy.800' }} ml={ 2 }/>
               <FallbackBox w="50px" ml="auto"/>
             </Flex>
             <FallbackBox w="100%" mt={ 2 }/>

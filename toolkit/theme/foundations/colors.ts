@@ -5,11 +5,8 @@ import config from 'configs/app';
 const DEFAULT_THEME_COLORS = {
   bg: {
     primary: {
-      // for some reason links to colors.white and colors.black variables are not working here
-      // so we use hex values instead
-      // but it is not the case for other colors
-      _light: { value: '#FFFFFF' }, // colors.white
-      _dark: { value: '#101112' }, // colors.black
+      _light: { value: '#FFFFFF' },
+      _dark: { value: '#0A2342' },
     },
   },
   text: {
@@ -23,24 +20,24 @@ const DEFAULT_THEME_COLORS = {
     },
   },
   hover: {
-    _light: { value: '{colors.blue.400}' },
-    _dark: { value: '{colors.blue.400}' },
+    _light: { value: '#F26A44' },
+    _dark: { value: '#F26A44' },
   },
   selected: {
     control: {
       text: {
-        _light: { value: '{colors.blue.700}' },
+        _light: { value: '{colors.north.700}' },
         _dark: { value: '{colors.gray.50}' },
       },
       bg: {
-        _light: { value: '{colors.blue.50}' },
+        _light: { value: '{colors.north.50}' },
         _dark: { value: '{colors.whiteAlpha.50}' },
       },
     },
     option: {
       bg: {
-        _light: { value: '{colors.blue.500}' },
-        _dark: { value: '{colors.blue.500}' },
+        _light: { value: '{colors.north.500}' },
+        _dark: { value: '{colors.north.500}' },
       },
     },
   },
@@ -56,8 +53,8 @@ const DEFAULT_THEME_COLORS = {
   },
   button: {
     primary: {
-      _light: { value: '{colors.blue.600}' },
-      _dark: { value: '{colors.blue.600}' },
+      _light: { value: '{colors.north.500}' },
+      _dark: { value: '{colors.north.400}' },
       text: {
         _light: { value: '{colors.white}' },
         _dark: { value: '{colors.white}' },
@@ -66,36 +63,36 @@ const DEFAULT_THEME_COLORS = {
   },
   link: {
     primary: {
-      _light: { value: '{colors.blue.600}' },
-      _dark: { value: '{colors.blue.300}' },
+      _light: { value: '{colors.north.600}' },
+      _dark: { value: '{colors.north.300}' },
     },
   },
   graph: {
     line: {
-      _light: { value: '{colors.blue.500}' },
-      _dark: { value: '{colors.blue.200}' },
+      _light: { value: '{colors.north.500}' },
+      _dark: { value: '{colors.north.200}' },
     },
     gradient: {
       start: {
-        _light: { value: 'rgba(144, 205, 244, 0.3)' }, // blue.200 with opacity 0.3
-        _dark: { value: 'rgba(144, 205, 244, 0.3)' }, // blue.200 with opacity 0.3
+        _light: { value: 'rgba(44, 166, 164, 0.3)' },
+        _dark: { value: 'rgba(44, 166, 164, 0.3)' },
       },
       stop: {
-        _light: { value: 'rgba(144, 205, 244, 0)' }, // blue.200 with opacity 0
-        _dark: { value: 'rgba(144, 205, 244, 0)' }, // blue.200 with opacity 0
+        _light: { value: 'rgba(44, 166, 164, 0)' },
+        _dark: { value: 'rgba(44, 166, 164, 0)' },
       },
     },
   },
   navigation: {
     bg: {
       selected: {
-        _light: { value: '{colors.blue.50}' },
-        _dark: { value: '{colors.gray.800}' },
+        _light: { value: '{colors.north.50}' },
+        _dark: { value: '{colors.navy.800}' },
       },
     },
     text: {
       selected: {
-        _light: { value: '{colors.blue.700}' },
+        _light: { value: '{colors.north.700}' },
         _dark: { value: '{colors.gray.50}' },
       },
     },
@@ -108,15 +105,15 @@ const DEFAULT_THEME_COLORS = {
   },
   topbar: {
     bg: {
-      _light: { value: '{colors.gray.50}' },
-      _dark: { value: '{colors.whiteAlpha.100}' },
+      _light: { value: '{colors.north.500}' },
+      _dark: { value: '{colors.north.700}' },
     },
   },
   tabs: {
     text: {
       primary: {
-        _light: { value: '{colors.blue.700}' },
-        _dark: { value: '{colors.blue.100}' },
+        _light: { value: '{colors.north.700}' },
+        _dark: { value: '{colors.north.100}' },
       },
     },
   },
@@ -269,6 +266,44 @@ const colors = {
     '700': { value: 'RGBA(16, 17, 18, 0.64)' },
     '800': { value: 'RGBA(16, 17, 18, 0.80)' },
     '900': { value: 'RGBA(16, 17, 18, 0.92)' },
+  },
+
+  // NORTH INVESTMENTS COLORS
+  north: {
+    '50': { value: '#E6FFFE' },
+    '100': { value: '#B3F5F3' },
+    '200': { value: '#80ECE9' },
+    '300': { value: '#4DD6D3' },
+    '400': { value: '#2CA6A4' },
+    '500': { value: '#2CA6A4' },
+    '600': { value: '#238A88' },
+    '700': { value: '#1A6E6C' },
+    '800': { value: '#125250' },
+    '900': { value: '#093634' },
+  },
+  navy: {
+    '50': { value: '#E8EDF5' },
+    '100': { value: '#C5D0E5' },
+    '200': { value: '#9DAFD0' },
+    '300': { value: '#6D87B5' },
+    '400': { value: '#3D5F99' },
+    '500': { value: '#1A3B6D' },
+    '600': { value: '#0F2D56' },
+    '700': { value: '#0A2342' },
+    '800': { value: '#071A31' },
+    '900': { value: '#041020' },
+  },
+  coral: {
+    '50': { value: '#FFF0EB' },
+    '100': { value: '#FFD5C7' },
+    '200': { value: '#FFB9A3' },
+    '300': { value: '#FF9D7F' },
+    '400': { value: '#F6845C' },
+    '500': { value: '#F26A44' },
+    '600': { value: '#D9522E' },
+    '700': { value: '#B53E1F' },
+    '800': { value: '#912D14' },
+    '900': { value: '#6D1E0B' },
   },
 
   // BRAND COLORS

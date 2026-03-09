@@ -39,7 +39,7 @@ const TopBar = () => {
 
   return (
     // not ideal if scrollbar is visible, but better than having a horizontal scroll
-    <Box bgColor={{ _light: 'theme.topbar.bg._light', _dark: 'theme.topbar.bg._dark' }} position="sticky" left={ 0 } width="100%" maxWidth="100vw">
+    <Box bgColor={{ _light: 'north.500', _dark: 'north.700' }} color="white" position="sticky" left={ 0 } width="100%" maxWidth="100vw">
       <Flex
         py={ 2 }
         px={{ base: 3, lg: 6 }}
@@ -48,13 +48,14 @@ const TopBar = () => {
         alignItems="center"
         maxW={ `${ CONTENT_MAX_WIDTH }px` }
       >
-        <HStack gap={ 0 } fontSize="xs">
+        <HStack gap={ 0 } fontSize="xs" color="whiteAlpha.800">
           { Boolean(config.UI.featuredNetworks.items || config.features.multichain.isEnabled) && <NetworkMenu/> }
           { !config.features.multichain.isEnabled ? <TopBarStats/> : <div/> }
         </HStack>
         <HStack
           alignItems="center"
-          separator={ <Separator mx={{ base: 2, lg: 3 }} height={ 4 }/> }
+          color="whiteAlpha.800"
+          separator={ <Separator mx={{ base: 2, lg: 3 }} height={ 4 } borderColor="whiteAlpha.300"/> }
         >
           { (hasAddChainButton || hasDeFiDropdown) && (
             <HStack>

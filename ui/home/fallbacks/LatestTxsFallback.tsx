@@ -18,7 +18,7 @@ const LatestTxsFallback = (props: BoxProps) => {
                 <VStack alignItems="stretch">
                   <HStack>
                     <IconSvg name="transactions" boxSize={ 5 } color={{ _light: 'gray.300', _dark: 'whiteAlpha.300' }}/>
-                    <FallbackBox w="90px" bgColor={{ _light: 'blue.50', _dark: 'blue.800' }}/>
+                    <FallbackBox w="90px" bgColor={{ _light: 'north.50', _dark: 'navy.800' }}/>
                     <FallbackBox w="90px" bgColor={{ _light: 'purple.50', _dark: 'purple.800' }}/>
                   </HStack>
                   <FallbackBox w="100%"/>
