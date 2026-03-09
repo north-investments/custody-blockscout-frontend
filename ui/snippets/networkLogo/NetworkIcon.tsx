@@ -16,7 +16,7 @@ const IconFallback = () => {
       name="networks/icon-placeholder"
       w="30px"
       h="30px"
-      color={{ base: 'blue.600', _dark: 'white' }}
+      color={{ base: 'north.500', _dark: 'white' }}
       aria-label="Network icon placeholder"
     />
   );
@@ -28,7 +28,10 @@ type Props = {
 
 const NetworkIcon = ({ className }: Props) => {
 
-  const iconSrc = useColorModeValue(config.UI.navigation.icon.default, config.UI.navigation.icon.dark || config.UI.navigation.icon.default);
+  const iconSrc = useColorModeValue(
+    config.UI.navigation.icon.default || '/static/NILogo.png',
+    config.UI.navigation.icon.dark || config.UI.navigation.icon.default || '/static/NorthWh.png',
+  );
 
   return (
     <chakra.a

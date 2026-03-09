@@ -62,8 +62,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
     // ELEMENTS
     address: {
       highlighted: {
-        bg: { value: { _light: '{colors.blue.50}', _dark: '{colors.blue.900}' } },
-        border: { value: { _light: '{colors.blue.200}', _dark: '{colors.blue.600}' } },
+        bg: { value: { _light: '{colors.north.50}', _dark: '{colors.navy.900}' } },
+        border: { value: { _light: '{colors.north.200}', _dark: '{colors.north.600}' } },
       },
     },
 
@@ -146,8 +146,8 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
           },
           selected: {
             value: {
-              _light: heroBannerButton?._selected?.background?.[0] || '{colors.blue.50}',
-              _dark: heroBannerButton?._selected?.background?.[1] || heroBannerButton?._selected?.background?.[0] || '{colors.blue.50}',
+              _light: heroBannerButton?._selected?.background?.[0] || '{colors.north.50}',
+              _dark: heroBannerButton?._selected?.background?.[1] || heroBannerButton?._selected?.background?.[0] || '{colors.north.50}',
             },
           },
         },
@@ -282,11 +282,11 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
       },
       bg: {
         DEFAULT: { value: '{colors.alert.bg.info}' },
-        info: { value: { _light: '{colors.blue.100}', _dark: '{colors.blue.900}' } },
+        info: { value: { _light: '{colors.north.100}', _dark: '{colors.navy.900}' } },
         warning: { value: '{colors.alert.bg.warning}' },
         success: { value: '{colors.alert.bg.success}' },
         error: { value: '{colors.alert.bg.error}' },
-        loading: { value: { _light: '{colors.blue.100}', _dark: '{colors.blue.900}' } },
+        loading: { value: { _light: '{colors.north.100}', _dark: '{colors.navy.900}' } },
       },
     },
     input: {
@@ -461,7 +461,7 @@ const semanticTokens: ThemingConfig['semanticTokens'] = {
           fg: { value: { _light: '{colors.blackAlpha.800}', _dark: '{colors.whiteAlpha.800}' } },
         },
         filter: {
-          bg: { value: { _light: '{colors.blue.50}', _dark: '{colors.whiteAlpha.200}' } },
+          bg: { value: { _light: '{colors.north.50}', _dark: '{colors.whiteAlpha.200}' } },
         },
         select: {
           bg: {

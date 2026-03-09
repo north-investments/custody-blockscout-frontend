@@ -4,114 +4,68 @@ on:
     workflow_dispatch:
         inputs:
             tags:
-                description: Image tags (e.g. "type=raw,value=foo")
+                description: Additional image tags (e.g. "latest")
                 required: false
                 type: string
             build_args:
                 description: Build-time variables
                 required: false
                 type: string
-            platforms:
-                description: Image platforms (you can specify multiple platforms separated by comma)
-                required: false
-                type: string
-                default: linux/amd64,linux/arm64/v8
-            private:
-                description: Make image private (true) or public (false)
-                required: false
-                type: boolean
-                default: true
     workflow_call:
         inputs:
             tags:
-                description: Image tags (e.g. "type=raw,value=foo")
+                description: Additional image tags (e.g. "latest")
                 required: false
                 type: string
             build_args:
                 description: Build-time variables
                 required: false
                 type: string
-            platforms:
-                description: Image platforms (you can specify multiple platforms separated by comma)
-                required: false
-                type: string
-                default: linux/amd64,linux/arm64/v8
-            private:
-                description: Make image private (true) or public (false)
-                required: false
-                type: boolean
-                default: true
+
+env:
+    NAME: 'custody-blockscout-frontend'
+    ACR_NAME: solidstate
+    AZURE_CLIENT_ID: '8e619a41-08e8-46d0-b38d-dd4185432cac'
+    AZURE_TENANT_ID: 'ea2aa545-c271-48b3-880d-0b56c78e4d9c'
+    AZURE_SUBSCRIPTION_ID: 'a5d084b6-9c2f-4792-997b-3b17c7854ab2'
 
 permissions:
+    id-token: write
     contents: read
-    packages: write
 
 jobs:
     run:
-        name: Run
-        runs-on: build
+        name: Build and Push
+        runs-on: ubuntu-latest
         steps:
             -   name: Check out the repo
                 uses: actions/checkout@v4
 
-            -   name: Set image name based on private flag
-                id: image-name
-                run: |
-                    if [ "${{ inputs.private }}" = "true" ]; then
-                        echo "image-name=ghcr.io/blockscout/frontend-private" >> $GITHUB_OUTPUT
-                    else
-                        echo "image-name=ghcr.io/blockscout/frontend" >> $GITHUB_OUTPUT
-                    fi
-
-            # Will automatically make nice tags, see the table here https://github.com/docker/metadata-action#basic
-            -   name: Docker meta
-                id: meta
-                uses: docker/metadata-action@v5
-                with:
-                    images: ${{ steps.image-name.outputs.image-name }}
-                    flavor: |
-                        latest=false
-                    tags: |
-                        type=ref,event=tag
-                        ${{ inputs.tags }}
-
             -   name: Add SHORT_SHA env property with commit short sha
                 run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
 
-            -   name: Debug
-                env:
-                    REF_TYPE: ${{ github.ref_type }}
-                    REF_NAME: ${{ github.ref_name }}
-                    IMAGE_NAME: ${{ steps.image-name.outputs.image-name }}
-                    IS_PRIVATE: ${{ inputs.private }}
+            -   name: Login to Azure
+                uses: azure/login@v2
+                with:
+                    client-id: ${{ env.AZURE_CLIENT_ID }}
+                    tenant-id: ${{ env.AZURE_TENANT_ID }}
+                    subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+
+            -   name: Login to ACR
+                run: az acr login --name $ACR_NAME
+
+            -   name: Set up Docker Buildx
+                uses: docker/setup-buildx-action@v3
+
+            -   name: Build and push Docker image
                 run: |
-                    echo "ref_type: $REF_TYPE"
-                    echo "ref_name: $REF_NAME"
-                    echo "image_name: $IMAGE_NAME"
-                    echo "is_private: $IS_PRIVATE"
-
-            -   name: Setup repo
-                uses: blockscout/actions/.github/actions/setup-multiarch-buildx@no-metadata
-                id: setup
-                with:
-                    docker-image: ${{ steps.image-name.outputs.image-name }}
-                    docker-username: ${{ github.actor }}
-                    docker-password: ${{ secrets.GITHUB_TOKEN }}
-                    docker-remote-multi-platform: true
-                    docker-arm-host: ${{ secrets.ARM_RUNNER_HOSTNAME }}
-                    docker-arm-host-key: ${{ secrets.ARM_RUNNER_KEY }}
-
-            -   name: Build and push
-                uses: docker/build-push-action@v5
-                with:
-                    context: .
-                    file: ./Dockerfile
-                    push: true
-                    cache-from: type=gha
-                    tags: ${{ steps.meta.outputs.tags }}
-                    platforms: ${{ inputs.platforms }}
-                    labels: ${{ steps.meta.outputs.labels }}
-                    build-args: |
-                        GIT_COMMIT_SHA=${{ env.SHORT_SHA }}
-                        GIT_TAG=${{ github.ref_type == 'tag' && github.ref_name || '' }}
-                        ${{ inputs.build_args }}
+                    TAG="${{ github.ref_type == 'tag' && github.ref_name || github.sha }}"
+                    docker build \
+                        -t $ACR_NAME.azurecr.io/$NAME:${{ github.sha }} \
+                        -t $ACR_NAME.azurecr.io/$NAME:$TAG \
+                        ${{ inputs.tags != '' && format('-t {0}.azurecr.io/{1}:{2}', env.ACR_NAME, env.NAME, inputs.tags) || '' }} \
+                        --build-arg GIT_COMMIT_SHA=${{ env.SHORT_SHA }} \
+                        --build-arg GIT_TAG=${{ github.ref_type == 'tag' && github.ref_name || '' }} \
+                        ${{ inputs.build_args }} \
+                        -f Dockerfile .
+                    docker push $ACR_NAME.azurecr.io/$NAME --all-tags
