@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout.
-name: Close inactive issues
-on:
-  workflow_dispatch:

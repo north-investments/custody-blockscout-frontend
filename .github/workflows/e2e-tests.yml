@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout.
-name: E2E tests
-on:
-  workflow_dispatch:
