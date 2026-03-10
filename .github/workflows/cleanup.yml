@@ -1,6 +1,0 @@
-name: Cleanup environments
-
-# Disabled — inherited from upstream Blockscout and requires their secrets/infrastructure.
-# Kept for reference only; will not trigger automatically.
-on:
-  workflow_dispatch:

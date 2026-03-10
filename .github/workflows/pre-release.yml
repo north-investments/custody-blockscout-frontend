@@ -1,5 +1,0 @@
-# Disabled — inherited from upstream Blockscout pre-release flow.
-# Versioning is handled by deploy-main.yml.
-name: Pre-release
-on:
-  workflow_dispatch:

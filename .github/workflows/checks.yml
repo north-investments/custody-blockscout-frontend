@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout.
-name: Checks
-on:
-  workflow_dispatch:

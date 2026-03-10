@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout review environments.
-name: Deploy review environment
-on:
-  workflow_dispatch:

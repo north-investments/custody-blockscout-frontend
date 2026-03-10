@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout project management.
-name: Update project cards
-on:
-  workflow_dispatch:

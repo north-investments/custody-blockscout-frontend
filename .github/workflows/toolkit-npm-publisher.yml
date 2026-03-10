@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout NPM publishing.
-name: Toolkit NPM publisher
-on:
-  workflow_dispatch:

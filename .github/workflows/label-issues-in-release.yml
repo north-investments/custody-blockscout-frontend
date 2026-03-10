@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout.
-name: Label issues in release
-on:
-  workflow_dispatch:

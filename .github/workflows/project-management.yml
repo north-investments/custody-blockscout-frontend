@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout project management.
-name: Project management
-on:
-  workflow_dispatch:

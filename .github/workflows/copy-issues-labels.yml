@@ -1,4 +1,0 @@
-# Disabled — inherited from upstream Blockscout.
-name: Copy issues labels
-on:
-  workflow_dispatch:
