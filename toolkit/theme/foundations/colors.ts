@@ -105,8 +105,8 @@ const DEFAULT_THEME_COLORS = {
   },
   topbar: {
     bg: {
-      _light: { value: '{colors.north.500}' },
-      _dark: { value: '{colors.north.700}' },
+      _light: { value: '{colors.gray.50}' },
+      _dark: { value: '{colors.whiteAlpha.100}' },
     },
   },
   tabs: {
